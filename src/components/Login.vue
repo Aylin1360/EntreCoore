@@ -1,54 +1,56 @@
 <template>
-  <v-container fluid>
-    <v-slide-y-transition mode="out-in">
-      <v-layout column align-center>
-         <v-form 
-         v-model="valid" 
-         @submit.prevent="login"
-         @keydown.prevent.enter
-         >
-            <v-text-field
-              v-model="user.userName"
-              :rules="notEmptyRules"
-              label="Username"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="user.password"
-              :rules="notEmptyRules"
-              label="Password"
-              type="password"
-              required
-            ></v-text-field>
-            <v-btn type="submit">Login</v-btn>
-         </v-form>
-        <v-progress-circular
-          v-if="loading"
-          :width="3"
-          color="green"
-          indeterminate>
-        </v-progress-circular> 
-      </v-layout>
-    </v-slide-y-transition>
-  </v-container>
+  <div>
+    <div class="container">
+    <div class="row">
+      <div class="col s12 m8 offset-m2">
+        <div class="login card-panel grey lighten-4 black-text center">
+          <h3>Login</h3>
+          <form action="index.html">
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input type="email" id="email" v-model="email">
+              <label class="white-text" for="email">Email Address</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">lock</i>
+              <input type="password" id="password" v-model="password">
+              <label class="white-text" for="password">Password</label>
+            </div>
+            <button v-on:click="login" class="btn btn-large btn-extended grey lighten-4 black-text">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 </template>
 
 <script>
+import firebase from 'firebase';
 export default {
   name: 'login',
-  data: (vm) => ({
-    valid: false,
-    user: {
-      userName: '',
+  data: function() {
+    return {
+      email: '',
       password: ''
-    },
-    notEmptyRules: [(value) => !!value || 'Cannot be empty']
-  }),
+    };
+  },
   methods: {
-    login () {
-      if (this.valid) {
-      }
+    login: function(e) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            alert(`You are logged in as ${user.email}`);
+            this.$router.go({ path: this.$router.path });
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+      e.preventDefault();
     }
   }
-}
+};
 </script>

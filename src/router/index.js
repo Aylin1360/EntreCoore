@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import SignUp from '@/components/SignUp'
 import Login from '@/components/Login'
 import Boards from '@/components/Boards'
+import firebase from 'firebase'
 
 Vue.use(Router)
 

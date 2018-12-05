@@ -1,62 +1,58 @@
 <template>
-  <v-container fluid>
-    <v-slide-y-transition mode="out-in">
-      <v-layout column align-center>
-         <v-form 
-         v-model="valid" 
-         @submit.prevent="signUp"
-         @keydown.prevent.enter
-         >
-            <v-text-field
-              v-model="user.userName"
-              :rules="notEmptyRules"
-              label="Username"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="user.password"
-              :rules="notEmptyRules"
-              label="Password"
-              type="password"
-              required
-            ></v-text-field>
-            <v-btn type="submit">Sign Up</v-btn>
-         </v-form>
-        <v-progress-circular
-          v-if="loading"
-          :width="3"
-          color="green"
-          indeterminate>
-        </v-progress-circular> 
-      </v-layout>
-    </v-slide-y-transition>
-  </v-container>
+  <div>
+    <div class="container">
+    <div class="row">
+      <div class="col s12 m8 offset-m2">
+        <div class="login card-panel grey lighten-4 black-text center">
+          <h3>Sign Up</h3>
+          <form action="index.html">
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input type="email" id="email" v-model="email">
+              <label for="email">Email Address</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">lock</i>
+              <input type="password" id="password" v-model="password">
+              <label for="password">Password</label>
+            </div>
+            <button v-on:click="register" class="btn btn-large btn-extended grey lighten-4 black-text">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 </template>
 
 <script>
-
-import axios from 'axios'
+import firebase from 'firebase';
 
 export default {
-  name: 'signUp',
-  data: (vm) => ({
-    valid: false,
-    user: {
+  name: 'register',
+  data: function() {
+    return {
       email: '',
       password: ''
-    },
-    notEmptyRules: [(value) => !!value || 'Cannot be empty'],
-    confirmPasswordRules: [
-      (confirmPassword) => confirmPassword === vm.user.password || 'Password must match!'
-    ]
-  }),
+    };
+  },
   methods: {
-    signUp () {
-    axios.post("https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=AIzaSyCaa2Giws-CcFDGushuApB0cc-vxscXZVI",
-    { email: this.user.email, password: this.user.password, returnSecureToken: true}
-    ), then(response => {
-    })
+    register: function(e) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            // console.log(user);
+            alert(`Account Created for ${user.email}`);
+            this.$router.go({ path: this.$router.path });
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+      e.preventDefault();
     }
   }
-}
+};
 </script>

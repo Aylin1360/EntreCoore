@@ -1,32 +1,65 @@
-<template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow mb-5">
-    <a class="navbar-brand" href="#">Auth İşlemleri</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" tag="li">
-          <a class="nav-link" href="#">Anasayfa</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav my-2 my-lg-0" :class="logoutClass">
-        <li class="nav-item">
-          <a @click.prevent="logout" class="nav-link" href="#">Çıkış Yap</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</template>
+ <template>
+  <nav>
+      <div class="nav-wrapper red">
+        <div class="container">
+          <router-link to="/" class="brand-logo">EntreCore</router-link>    
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li v-if="isLoggedIn"><span class="email black-text">{{currentUser}}</span></li>
+            <li v-if="isLoggedIn"><router-link to="/">New Note</router-link></li>
+            <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
+            <li v-if="!isLoggedIn"><router-link to="/signUp">Sign Up</router-link></li>
+             <li v-if="isLoggedIn"><button v-on:click="logout" class="btn grey">Logout</button></li>
+             
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li v-if="isLoggedIn"><router-link to="/">New Note</router-link></li>
+            <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
+            <li v-if="!isLoggedIn"><router-link to="/signUp">Sign Up</router-link></li>
+            <li><a href="#" class="divider"></a></li>
+             <li v-if="isLoggedIn"><button v-on:click="logout" class="btn">Logout</button></li>
+           
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </template>
+
 <script>
-  export default {
-    methods: {
-      logout() {
-      }
-    },
-    computed: {
-      logoutClass() {
-        return {
-          'd-none': false
-        }
-      }
+import firebase from 'firebase';
+export default {
+  name: 'header',
+  data() {
+    return {
+      isLoggedIn: false,
+      currentUser: false
+    };
+  },
+  created() {
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true;
+      this.currentUser = firebase.auth().currentUser.email;
+    }
+  },
+  methods: {
+    logout: function() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.go({ path: this.$router.path });
+        });
     }
   }
+};
 </script>
+
+<style scoped>
+
+nav{
+  margin: 0 15px 40px 0px;
+}
+.container{
+  padding: 0px 30px 25px 5px;
+}
+</style>
