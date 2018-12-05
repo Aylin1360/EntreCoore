@@ -1,12 +1,12 @@
 import firebase from 'firebase'
 
  const config = {
-    apiKey: "AIzaSyCaa2Giws-CcFDGushuApB0cc-vxscXZVI",
-    authDomain: "deneme-pl.firebaseapp.com",
-    databaseURL: "https://deneme-pl.firebaseio.com",
-    projectId: "deneme-pl",
-    storageBucket: "deneme-pl.appspot.com",
-    messagingSenderId: "407354484165"
+    apiKey: "AIzaSyBqnf7RE-9V9ln3jjioe0RNvZUjVCuRj5A",
+    authDomain: "entrecor-3259d.firebaseapp.com",
+    databaseURL: "https://entrecor-3259d.firebaseio.com",
+    projectId: "entrecor-3259d",
+    storageBucket: "entrecor-3259d.appspot.com",
+    messagingSenderId: "244861581662"
   };
   firebase.initializeApp(config);
 
