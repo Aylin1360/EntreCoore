@@ -42,14 +42,14 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(
           user => {
-            alert(`You are logged in as ${user.email}`);
-            this.$router.go({ path: this.$router.path });
+            alert("You are logged in succesfully");
+            this.$router.push({ path: "/boards" });
           },
           err => {
             alert(err.message);
           }
-        );
-      e.preventDefault();
+        )
+      e.preventDefault()
     }
   }
 };

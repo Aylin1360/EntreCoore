@@ -1,66 +1,42 @@
 <template>
-  <v-container fluid>
-    <v-slide-y-transition mode="out-in">
-      <v-layout column align-center>
-        <v-progress-circular
-          v-if="loading"
-          :width="3"
-          color="green"
-          indeterminate>
-        </v-progress-circular> 
-        <pre v-if="!loading">
-          {{boards}}
-        </pre>
-            <v-flex sm4>
-          <v-card>
-            <v-card-title>
-              <div>
-                  <div class="headline">Create Board</div>
-                  <div>
-                    <v-form 
-                   v-if="!creating" 
-                   v-model="valid" 
-                   @submit.prevent="createBoard"
-                   @keydown.prevent.enter
-                   >
-                      <v-text-field
-                        v-model="board.name"
-                        :rules="notEmptyRules"
-                        label="Name"
-                        required
-                      ></v-text-field>
-                      <v-text-field
-                        v-model="board.background"
-                        :rules="notEmptyRules"
-                        label="Background"
-                        required
-                      ></v-text-field>
-                      <v-btn type="submit">Create</v-btn>
-                   </v-form>
-                  </div>
-              </div>
-            </v-card-title>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-slide-y-transition>
-  </v-container>
+  <v-layout>
+    <v-flex xs12 sm6 offset-sm3>
+      <v-card>
+        <v-img
+          class="white--text"
+          height="200px"
+          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        >
+          <v-container fill-height fluid>
+            <v-layout fill-height>
+              <v-flex xs12 align-end flexbox>
+                <span class="headline">Top 10 Australian beaches</span>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-img>
+        <v-card-title>
+          <div>
+            <span class="grey--text">Number 10</span><br>
+            <span>Whitehaven Beach</span><br>
+            <span>Whitsunday Island, Whitsunday Islands</span>
+          </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-btn flat color="orange">Share</v-btn>
+          <v-btn flat color="orange">Explore</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
+
 <script>
+
 export default {
   name: 'boards',
-  data: () => ({
-    creating: false,
-    valid: false,
-    board: {
-      name: '',
-      background: ''
-    },
-    notEmptyRules: [(value) => !!value || 'Cannot be empty']
-  }),
-  methods () {
-  createBoard({})
+  components: {
   }
 }
-  </script>
+</script>

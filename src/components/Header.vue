@@ -6,14 +6,14 @@
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
             <li v-if="isLoggedIn"><span class="email black-text">{{currentUser}}</span></li>
-            <li v-if="isLoggedIn"><router-link to="/">New Note</router-link></li>
+            <li v-if="isLoggedIn"><router-link to="/">View Notes</router-link></li>
             <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
             <li v-if="!isLoggedIn"><router-link to="/signUp">Sign Up</router-link></li>
              <li v-if="isLoggedIn"><button v-on:click="logout" class="btn grey">Logout</button></li>
              
           </ul>
           <ul class="side-nav" id="mobile-demo">
-            <li v-if="isLoggedIn"><router-link to="/">New Note</router-link></li>
+            <li v-if="isLoggedIn"><router-link to="/">View Notes</router-link></li>
             <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
             <li v-if="!isLoggedIn"><router-link to="/signUp">Sign Up</router-link></li>
             <li><a href="#" class="divider"></a></li>

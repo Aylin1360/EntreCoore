@@ -44,8 +44,8 @@ export default {
         .then(
           user => {
             // console.log(user);
-            alert(`Account Created for ${user.email}`);
-            this.$router.go({ path: this.$router.path });
+            alert("Account Created succesfully");
+            this.$router.push({ path: "/boards" });
           },
           err => {
             alert(err.message);
