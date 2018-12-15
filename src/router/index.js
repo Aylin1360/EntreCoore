@@ -1,60 +1,45 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/Home'
-import SignUp from '@/components/SignUp'
-import Login from '@/components/Login'
-import Boards from '@/components/Boards'
-import firebase from 'firebase'
-import NewNote from '@/components/NewNote'
-import EditNote from '@/components/EditNote'
-import ViewNote from '@/components/ViewNote'
-import TodoInput from '@/components/TodoInput'
-import TodoItem from '@/components/TodoItem'
-import Notes from '@/components/Notes'
+import Vue from 'vue';
+import Router from 'vue-router';
+import HelloWorld from '@/components/HelloWorld';
+import Update from '@/components/Update';
+import Board from '@/components/Board';
+import Login from '@/components/Login';
+import SignUp from '@/components/SignUp';
+import Notes from '@/components/Notes';
+import NewNote from '@/components/NewNote';
 
-Vue.use(Router)
+
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Home',
-      component: Home
+      path: '/update',
+      component: Update,
     },
     {
-      path: '/signUp',
-      name: 'signUp',
-      component: SignUp
+      path: '*',
+      redirect: '/backlog',
+    },
+    {
+      path: '/board',
+      component: Board,
     },
     {
       path: '/login',
-      name: 'login',
-      component: Login
+      component: Login,
     },
     {
-      path: '/boards',
-      name: 'boards',
-      component: Boards
-    },
-    {
-      path: '/new',
-      name: 'new-note',
-      component: NewNote
-    },
-    {
-      path: '/edit/:note_id',
-      name: 'edit-note',
-      component: EditNote,
-      },
-    {
-      path: '/:note_id',
-      name: 'view-note',
-      component: ViewNote
+      path: '/',
+      component: SignUp,
     },
     {
       path: '/notes',
-      name: 'notes',
-      component: Notes
-    }
-  ]
-})
+      component: Notes,
+    },
+    {
+      path: '/new',
+      component: NewNote,
+    },
+  ],
+});

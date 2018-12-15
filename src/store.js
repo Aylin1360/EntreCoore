@@ -1,28 +1,24 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-cons store = new Vuex.store.({
-	state : {
-		token : "",
-		apiKey: "AIzaSyCaa2Giws-CcFDGushuApB0cc-vxscXZVI",
-	},
-	mutations : {
-		setToken(state,token){
-			state.token = token
-		},
-		clearToken(state){
-			state.token = ""
-		}
-	},
-	actions : {
-		login({ commit, dispatch, state}, autData){
-		},
-		logout({ commit, dispatch, state}, autData){
-		},
-	},
-	getters : {}
-})
-
-export default store
+export default new Vuex.Store({
+  state: {
+    items: {
+      todo: [],
+      inProgress: [],
+      done: [],
+    },
+    nextId: 1,
+  },
+   mutations: {
+    addItem(state, item) {
+      state.items.todo.push(Object.assign(item, { id: state.nextId }));
+      state.nextId += 1;
+    },
+    updateItems(state, { items, id }) {
+      state.items[id] = items;
+    },
+  },
+});
