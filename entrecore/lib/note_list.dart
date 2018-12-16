@@ -133,8 +133,8 @@ class MyNoteListState extends State<MyNoteList> {
                                                     msg: 'Note was updated',
                                                     toastLength:
                                                         Toast.LENGTH_SHORT,
-                                                    bgcolor: '#FFF',
-                                                    textcolor: '#333');
+                                                    backgroundColor: Colors.white,    
+                                                    textColor: Colors.white);
                                               },
                                               child: Text('UPDATE')),
                                         ],
@@ -152,9 +152,8 @@ class MyNoteListState extends State<MyNoteList> {
                               Fluttertoast.showToast(
                                   msg: 'Contact was deleted',
                                   toastLength: Toast.LENGTH_SHORT,
-                                  bgcolor: '#FFF',
-                                  textcolor: '#333');
-
+                                  backgroundColor: Colors.white,
+                                  textColor: Colors.grey,);              
                               //Refresh data
                               setState(() {
                                 getNoteFromDB();

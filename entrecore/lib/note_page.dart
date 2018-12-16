@@ -106,7 +106,7 @@ class _NotePageState extends State<NotePage> {
     Fluttertoast.showToast(
         msg: 'Note was saved',
         toastLength: Toast.LENGTH_SHORT,
-        bgcolor: '#FFD50000',
-        textcolor: '#000');
+        backgroundColor: Colors.redAccent,
+        textColor: Colors.black);
   }
 }
